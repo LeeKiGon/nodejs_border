@@ -1,0 +1,113 @@
+</html>
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- font-awesome CSS -->
+  <script src="https://kit.fontawesome.com/727ce840af.js" crossorigin="anonymous"></script>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  <!-- 날짜 CDN -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+  <title> 게시판 만들기</title>
+</head>
+<style>
+  .wrap {
+    width: 800px;
+    margin: auto;
+  }
+
+  .form-group {
+    margin-top: 30px;
+  }
+
+  .label {
+    margin-top: 20px;
+  }
+
+  .btncls {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    margin-top: 10px;
+  }
+
+  .btn-primary {
+    margin-left: 20px;
+  }
+
+  .inputPwd {
+    -webkit-text-security: disc;
+  }
+</style>
+<script>
+  // function post_border() {
+  //   let title = $("#title").val()
+  //   let name = $("#name").val()
+  //   let pw = $("#pw").val()
+  //   let memo = $("#memo").val()
+  //   $.ajax({
+  //     type: "POST",
+  //     url: `/api/post`,
+  //     data: {
+  //       //post 보낼 데이터
+  //       title: title,
+  //       name: name,
+  //       pw: pw,
+  //       memo: memo,
+  //     },
+  //     success: function (response) {
+  //         alert("게시글이 등록 되었습니다!");
+  //         window.location.href="/"
+  //     }
+  //   });
+  // }
+</script>
+
+<body>
+  <form action = "/api/post" method = "post">
+  <div class='wrap'>
+    <h1>게 시 판</h1>
+    <div class="form-group">
+      <div class="label">
+        <label for="exampleFormControlInput1" style="font-weight: bold;" >제목 : </label>
+        <input type="text" id="titles" name="title" />
+      </div>
+      <div class="label">
+        <label for="exampleFormControlInput1" style="font-weight: bold;">작성자 :</label>
+        <input type="text" id="names" name="name"/>
+      </div>
+      <div class="label">
+        <label for="exampleFormControlInput1" style="font-weight: bold;">비밀 번호 : </label>
+        <input class="inputPwd" id="pw" type="String" name="pw"/>
+      </div>
+      <div class="label">
+        <label for="exampleFormControlInput1">내용</label>
+        <textarea class="form-control" id="memo" type="text" rows="10" name="memo"></textarea>
+      </div>
+    </div>
+    <div class="btncls">
+      <button class="btn btn-primary" type="submit">글 작성 완료</button>
+      <button class="btn btn-primary" onclick="location.href='/'">뒤로 가기</button>
+    </div>
+  </div>
+  </form>
+</body>
+
+</html>

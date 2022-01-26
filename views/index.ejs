@@ -1,0 +1,102 @@
+</html>
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- font-awesome CSS -->
+  <script src="https://kit.fontawesome.com/727ce840af.js" crossorigin="anonymous"></script>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  <!-- 날짜 CDN -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+  <title> 게 시 판</title>
+</head>
+<style>
+</style>
+<script>
+  $(document).ready(function(){
+    post();
+  })
+
+  function news() {
+      location.href = '/news'
+  }
+  function post() {
+    $.ajax({
+      type: 'GET',
+      dataType: 'json',
+      async: true,
+      url: '/api/post',
+      data: {},
+      success: function (response) {
+        let writeList = response['post'];
+        
+        for (let i = 0; i < writeList.length; i++) {
+          let number = i
+          let title = writeList[i]["title"];
+          let name = writeList[i]["name"];
+          let date = writeList[i]["Date"];
+          let _id = writeList[i]["_id"];
+          let temp_html = `<tr>
+            <td>${number}</a></td>
+            <td><a href="/post/${_id}">${title}</td>
+            <td>${name}</td>
+            <td>${moment(date).format('YY/MM/DD')}</td>
+        </tr>`
+          $('#post').prepend(temp_html);
+        }
+      }
+    });
+  }
+</script>
+
+<body>
+  </form>
+  <table class="table table-hovber" style="margin: auto; height:300px; width:900px;">
+    <thead>
+      <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성 날짜</th>
+      </tr>
+    </thead>
+    <tbody  id="post">
+    </tbody>     
+    </tbody>
+  </table>
+  <hr />
+  <button type="button" class="btn btn-primary" style="margin:auto; display:block;" onclick = "news()">게시글 작성</button>
+  <hr />
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1">Previous</a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#">Next</a>
+      </li>
+    </ul>
+  </nav>
+</body>
+
+</html>
