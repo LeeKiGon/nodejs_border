@@ -22,7 +22,7 @@ const postSchema = mongoose.Schema({ //schema 생성
     },
     Date: {
         type: Date,
-        default: Date.now,
+        default: new Date
     }    
 });
 

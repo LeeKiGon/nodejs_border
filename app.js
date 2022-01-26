@@ -14,6 +14,7 @@ const requestMiddleware = (req, res, next) => {
     console.log("Request URL:", req.originalUrl,"-", new Date());
     next();
 };
+console.log(new Date);
 
 app.set("views", __dirname + "/views")
 app.set("view engine", "ejs")
@@ -28,7 +29,7 @@ app.get("/", (req, res) => {
 //게시글 상세페이지
 app.get("/post/:id", async (req, res) => {    
     const {id} = req.params;    
-    const [writedData] = await Post.find({_id: id});
+    const [writedData] = await Post.find({_id: id}); //[해줘야 배열값 받아옴]
     res.render("post", {list: writedData});
 });
 
@@ -62,6 +63,20 @@ app.delete("/delete", async (req, res) => {
         }else{
             res.status(400).json({success: false ,msg:'비밀번호가 다릅니다!'});
         };
+});
+//게시글 수정!!
+app.post("/save/:id", async (req, res) => {
+    console.log("asdfasdf");
+    const {Id,password,memo} = req.body;
+    console.log(req.body);
+    const [saveData] = await Post.find({_id : Id});
+    console.log("adsf");
+    if (saveData['pw'] === password) {
+        await Post.findByIdAndUpdate(req.params.id, {memo: req.body.memo});
+        res.json({ success: '수정 완료!' })
+    } else {
+        res.json({ success: "비밀번호가 틀립니다!!"})
+    }
 });
         
 app.listen(port, () => {

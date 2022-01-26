@@ -26,7 +26,7 @@ router.get("/post", async (req, res) => {
 // });
 
 router.post("/post", async (req, res) => {
-    const { name, pw, memo, title} = req.body; //클라이언트로 부터 값 받기
+    const { name, pw, memo, title, Date} = req.body; //클라이언트로 부터 값 받기
     console.log(req.body)
     // const post = await Post.find({ Date }); // postId값을 찾는다
     // if (post.length) { //입력받은 데이터가 db에 이미 있을경우
@@ -34,10 +34,7 @@ router.post("/post", async (req, res) => {
     //     .status(400) //에러코드
     //     .json({ success: false, errorMessage: "이미 있는 데이터 입니다." }); //에러시 출력!!
     // }
-
-
-    let date = Date.now();
-    await Post.create({ name, pw, memo, title,date}); //dbdp 저장
+    await Post.create({ name, pw, memo, title,Date}); //dbdp 저장
     
     res.redirect("/");
 

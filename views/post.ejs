@@ -78,8 +78,8 @@
           type: "DELETE",
           url: "/delete",
           data: {
-            Id:'<%=list._id%>',
-            password:$('#pw').val(),
+            Id:"<%=list._id%>",
+            password:$("#pw").val(),
           },
           error: function (xhr, status, error) {
             if(xhr.status===400){
@@ -89,13 +89,31 @@
 
           },
           success: function (response) {
-            let msg = response['msg'];
+            let msg = response["msg"];
             alert(msg);
-            window.location.href='/';
+            window.location.href="/";
           },
         });
     }
 
+    function save() {
+            console.log("ss");
+            $.ajax({
+                async: true,
+                type: "POST",
+                url: "/save/<%=list.id%>",
+                dataType: "json",
+                data: {memo: $("#memo").val(),
+                            password: $("#pw").val(),
+                            Id:"<%=list._id%>"},                
+                success: function(response) {
+                    alert(response["success"]);
+                    console.log("dd");
+                    location.reload();
+                    console.log("vv");
+                }
+            })
+        }
 </script>
 
 <body>  
@@ -112,7 +130,7 @@
       </div>
       <div class="label">
         <label for="exampleFormControlInput1" style="font-weight: bold;">비밀 번호 : </label>
-        <input class="inputPwd" id="pw" type="String" name="pw" placeholder="<%= list.pw %>"/>
+        <input class="inputPwd" id="pw" type="String" name="pw"/>
       </div>      
       <div class="label">
         <label for="exampleFormControlInput1">내용</label>
@@ -121,8 +139,8 @@
     </div>
     <div class="btncls">
       <button class="btn btn-danger" onclick=post_delete()>삭제하기</button>
-      <button class="btn btn-primary" type="submit" onclick="post_border()">글 수정</button>
-      <button class="btn btn-primary" onclick="location.href='/'">뒤로 가기</button>
+      <button class="btn btn-primary" type="submit" onclick="save()">글 수정</button>
+      <button class="btn btn-primary" onclick="location.href='/api/index'">뒤로 가기</button>
     </div>
   </div>
 </body>
