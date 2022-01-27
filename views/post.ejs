@@ -56,60 +56,45 @@
     -webkit-text-security: disc;
   }
 </style>
-<!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
-  $("btn btn-danger").click(function(){
-    $.ajax({
-    methon : "DELETE",
-    url : "/api/delete",
-    data : {pw : $('#pw')},
-  }).done(function(결과){
-
-  });
-  })
-   -->
-
-<script>
-
-
     function post_delete() {
 
-      $.ajax({
-          type: "DELETE",
-          url: "/delete",
+      $.ajax({ //게시글 삭제 ajax
+          type: "DELETE", //타입
+          url: "/delete", //보낼 url
           data: {
-            Id:"<%=list._id%>",
-            password:$("#pw").val(),
+            Id:"<%=list._id%>", //id값
+            password:$("#pw").val(),  //입력받은 pw값
           },
-          error: function (xhr, status, error) {
+          error: function (xhr, status, error) { //에러 처리
             if(xhr.status===400){
-              alert(xhr.responseJSON.msg);
-              window.location.href="/";
+              alert(xhr.responseJSON.msg); //에러 메세지 띄어주기
+              window.location.href="/"; //에러시 "/"페이지로 이동
             }
 
           },
           success: function (response) {
-            let msg = response["msg"];
-            alert(msg);
-            window.location.href="/";
+            let msg = response["msg"]; //response["msg"]값을 변수에 저장
+            alert(msg); //alert로 띄어주기
+            window.location.href="/"; 
           },
         });
     }
 
-    function save() {
+    function save() { //게시글 수정 ajax
             console.log("ss");
-            $.ajax({
+            $.ajax({ 
                 async: true,
-                type: "POST",
-                url: "/save/<%=list.id%>",
-                dataType: "json",
-                data: {memo: $("#memo").val(),
+                type: "POST", //POST 타입
+                url: "/save/<%=list.id%>", //값을 보낼 url
+                dataType: "json", //데이터 타입(json)
+                data: {memo: $("#memo").val(), //서버에 보낼 데이터
                             password: $("#pw").val(),
                             Id:"<%=list._id%>"},                
                 success: function(response) {
                     alert(response["success"]);
                     console.log("dd");
-                    location.reload();
+                    location.reload(); //성공시 새로고침
                     console.log("vv");
                 }
             })
@@ -122,11 +107,11 @@
     <div class="form-group">
       <div class="label">
         <label for="exampleFormControlInput1" style="font-weight: bold;" >제목  : </label>
-        <input type="text" id="title" value= "<%= list.title %>" />
+        <input type="text" id="title" disabled="disabled" value= "<%= list.title %>" />
       </div>
       <div class="label">
         <label for="exampleFormControlInput1" style="font-weight: bold;">작성자 :</label>
-        <input type="text" id="name" value= "<%= list.name %>"/>
+        <input type="text" id="name" disabled="disabled" value= "<%= list.name %>"/>
       </div>
       <div class="label">
         <label for="exampleFormControlInput1" style="font-weight: bold;">비밀 번호 : </label>

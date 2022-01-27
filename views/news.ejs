@@ -52,35 +52,38 @@
     margin-left: 20px;
   }
 
-  .inputPwd {
+  .inputPwd { 
     -webkit-text-security: disc;
   }
 </style>
 <script>
   // function post_border() {
-  //   let title = $("#title").val()
-  //   let name = $("#name").val()
-  //   let pw = $("#pw").val()
-  //   let memo = $("#memo").val()
+  //   let title = $("#title").val() //title에 입력받은 값을 변수에 저장
+  //   let name = $("#name").val()   //name에 입력받은 값을 변수에 저장
+  //   let pw = $("#pw").val()       //pw에 입력받은 값을 변수에 저장
+  //   let memo = $("#memo").val()   //memp에 입력받은 값을 변수에 저장
   //   $.ajax({
-  //     type: "POST",
-  //     url: `/api/post`,
+  //     type: "POST",  //POST타입
+  //     url: `/api/post`,  //입력받은 값을 보내는 url
   //     data: {
   //       //post 보낼 데이터
-  //       title: title,
+  //       title: title, //변수에 입력받은 값을, 보낼 데이터
   //       name: name,
   //       pw: pw,
   //       memo: memo,
   //     },
   //     success: function (response) {
   //         alert("게시글이 등록 되었습니다!");
-  //         window.location.href="/"
+  //         window.location.href="/" //완료되면 "/" 페이지로 이동!!(새로고침)
   //     }
   //   });
   // };
 </script>
 
 <body>
+  <!--form 형식을 이용해 ajax를 이용하지 않고도 데이터를 보낼수있다-->
+  <!--처음 form 작성해주고, 마지막에 다시한번 </form>으로 닫아줌으로써 사용!!-->
+  <!--input에 있는 name값으로 입력받은 값을 담아 서버에 전송!! -->
   <form action = "/api/post" method = "post">
   <div class='wrap'>
     <h1>게 시 판</h1>
